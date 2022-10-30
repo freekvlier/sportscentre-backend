@@ -1,14 +1,14 @@
-package com.service.workout;
+package com.service.workout.model;
 
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.Date;
-import java.util.List;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Builder
+@Document("excercises")
 public class Excercise {
+
 
     private Integer id;
     private ExcerciseType excerciseType;

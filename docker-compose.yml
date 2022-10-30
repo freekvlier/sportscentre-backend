@@ -1,0 +1,36 @@
+services:
+  mongo:
+    container_name: mongoDB
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+    volumes:
+      - mongo:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - mongo
+    restart: unless-stopped
+
+  workout:
+    image: freaxy/workout:latest
+    container_name: workout
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - mongo
+    depends_on:
+      - mongo
+
+networks:
+  mongo:
+    driver: bridge
+  spring:
+    driver: bridge
+
+volumes:
+  mongo:

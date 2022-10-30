@@ -1,4 +1,4 @@
-package com.service.workout;
+package com.service.workout.model;
 
 import java.util.Date;
 import java.util.List;
