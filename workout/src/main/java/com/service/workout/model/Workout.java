@@ -18,11 +18,11 @@ import java.util.List;
 @Document("workouts")
 public class Workout {
 
-    @Transient
-    public static final String SEQUENCE_NAME = "workouts_sequence";
+    // @Transient
+    // public static final String SEQUENCE_NAME = "workouts_sequence";
 
     @Id
-    private Integer id;
+    private String id;
     private String name;
 //    private List<Excercise> excercise;
     private Date date;

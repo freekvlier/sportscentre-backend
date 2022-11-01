@@ -6,7 +6,6 @@ spring:
       name: workout
     data:
       mongodb:
-        host: localhost #default port = 27017
-        username: mongo
-        password: mongo
+        uri: mongodb://mongo:mongo@mongo:27017
         database: test
+        
