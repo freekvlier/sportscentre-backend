@@ -26,6 +26,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -53,7 +55,9 @@ class WorkoutApplicationTest {
 
         //Act
         mockMvc.perform(MockMvcRequestBuilders.post("/api/workout")
-                .contentType(MediaType.APPLICATION_JSON).content(workoutRequestJson)).andExpect(status().isCreated());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(workoutRequestJson))
+                .andExpect(status().isCreated());
 
         //Assert
         Assertions.assertEquals(1, workoutRepository.findAll().size());
@@ -61,13 +65,18 @@ class WorkoutApplicationTest {
 
     @Test
     void getAllWorkouts() throws Exception {
-        List<Workout> allWorkouts = workoutRepository.findAll();
+        //Arrange
+        workoutRepository.save(Workout.builder()
+                .name("getAllWorkoutsTest")
+                .exercises(getExerciseList())
+                .date(new Date())
+                .build());
+        Integer workoutsCount = workoutRepository.findAll().size();
 
+        //Act/Assert
         mockMvc.perform(MockMvcRequestBuilders.get("/api/workout"))
-                .andExpect(status().isOk());
-
-        //Assert
-        Assertions.assertEquals(1, workoutRepository.findAll().size());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(workoutsCount)));
     }
 
     private WorkoutRequest getWorkoutRequest() {

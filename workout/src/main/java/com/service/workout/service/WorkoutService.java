@@ -24,10 +24,10 @@ public record WorkoutService(IWorkoutRepository workoutRepository) {
         workoutRepository.save(workout);
     }
 
-    public void getAll() {
+    public List<WorkoutResponse> getAll() {
         List<Workout> workouts = workoutRepository.findAll();
 
-        workouts.stream().map(this::mapToWorkoutResponse).toList();
+        return workouts.stream().map(this::mapToWorkoutResponse).toList();
     }
 
     private WorkoutResponse mapToWorkoutResponse(Workout workout) {
