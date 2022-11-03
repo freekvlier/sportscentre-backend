@@ -1,22 +1,25 @@
 package com.service.workout.controller;
 
-import com.service.workout.model.WorkoutCreationRequest;
+import com.service.workout.dto.WorkoutRequest;
 import com.service.workout.service.WorkoutService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@Slf4j
 @RestController
 @RequestMapping("workout")
+@Slf4j
 public record WorkoutController(WorkoutService workoutservice) {
 
     @PostMapping
-    public void createWorkout(@RequestBody WorkoutCreationRequest workoutCreationRequest){
-        log.info("New Workout Created {]", workoutCreationRequest);
-        workoutservice.create(workoutCreationRequest);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createWorkout(@RequestBody WorkoutRequest request){
+        log.info("Workoutcontroller: New Workout Create request {]", request);
+        workoutservice.create(request);
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public void GetAllWorkouts(){
         log.info("Get All Workouts");
         workoutservice.getAll();

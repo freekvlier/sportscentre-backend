@@ -1,11 +1,10 @@
-package com.service.workout.model;
+package com.service.workout.dto;
 
+import com.service.workout.model.Exercise;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.List;
@@ -14,12 +13,9 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document("workouts")
-public class Workout {
-
-    @Id
+public class WorkoutResponse {
     private String id;
     private String name;
-    private List<Exercise> exercises;
+    private List<Exercise> exercise;
     private Date date;
 }

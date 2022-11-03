@@ -7,19 +7,16 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document("workouts")
-public class Workout {
-
+@Document("excercises")
+public class Exercise {
     @Id
-    private String id;
-    private String name;
-    private List<Exercise> exercises;
-    private Date date;
+    private Integer id;
+    private String exerciseType;
+    private Integer weight;
+    private Integer sets;
+    private Integer reps;
 }
