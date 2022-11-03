@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("workout")
+@RequestMapping("/api/workout")
 @Slf4j
 public record WorkoutController(WorkoutService workoutservice) {
 

@@ -20,7 +20,8 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <spring.boot.maven.plugin.version>2.7.5</spring.boot.maven.plugin.version>
-    <spring.boot.depencies.version>2.7.5</spring.boot.depencies.version>
+    <spring.boot.dependencies.version>2.7.5</spring.boot.dependencies.version>
+    <testcontainers.dependency.version>1.17.5</testcontainers.dependency.version>
     <image>freaxy/${project.artifactId}:${project.version}</image>
   </properties>
 
@@ -29,9 +30,16 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>${spring.boot.depencies.version}</version>
+        <version>${spring.boot.dependencies.version}</version>
         <scope>import</scope>
         <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers-bom</artifactId>
+        <version>${testcontainers.dependency.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -44,6 +52,11 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

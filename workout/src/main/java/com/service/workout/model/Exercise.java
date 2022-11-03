@@ -13,8 +13,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document("excercises")
 public class Exercise {
-    @Id
-    private Integer id;
     private String exerciseType;
     private Integer weight;
     private Integer sets;
