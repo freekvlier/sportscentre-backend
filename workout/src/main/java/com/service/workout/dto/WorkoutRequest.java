@@ -15,6 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 public class WorkoutRequest {
     private String name;
-    private List<Exercise> exercise;
+    private List<Exercise> exercises;
     private Date date;
 }

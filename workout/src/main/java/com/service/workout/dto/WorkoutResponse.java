@@ -16,6 +16,6 @@ import java.util.List;
 public class WorkoutResponse {
     private String id;
     private String name;
-    private List<Exercise> exercise;
+    private List<Exercise> exercises;
     private Date date;
 }

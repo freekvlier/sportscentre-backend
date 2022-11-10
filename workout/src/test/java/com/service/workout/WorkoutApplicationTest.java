@@ -82,7 +82,7 @@ class WorkoutApplicationTest {
     private WorkoutRequest getWorkoutRequest() {
         return WorkoutRequest.builder()
                 .name(RandomStringUtils.randomAlphabetic(10))
-                .exercise(getExerciseList())
+                .exercises(getExerciseList())
                 .date(new Date())
                 .build();
     }
