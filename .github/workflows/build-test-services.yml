@@ -9,8 +9,8 @@ on: [push]
 #    branches: [ master, dev ]
 
 jobs:
-  build:
-    name: Build Services
+  build-test-workout-service:
+    name: Build and test Services
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
