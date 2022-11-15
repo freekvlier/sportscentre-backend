@@ -10,7 +10,7 @@ on: [push]
 
 jobs:
   build-test-workout-service:
-    name: Build and test Services
+    name: Build and test workout service
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
