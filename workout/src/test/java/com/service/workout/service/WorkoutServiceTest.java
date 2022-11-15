@@ -24,7 +24,7 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class WorkoutServiceTest {
+public class WorkoutServiceTest {
 
     @Mock
     private IWorkoutRepository workoutRepository;

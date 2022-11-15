@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = WorkoutController.class)
 @ContextConfiguration(classes = WorkoutController.class)
-class WorkoutControllerTest {
+public class WorkoutControllerTest {
 
     @MockBean
     private WorkoutService workoutService;
