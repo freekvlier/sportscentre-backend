@@ -1,4 +1,4 @@
-#Multi Stage Docker Build https://spring.io/guides/topicals/spring-boot-docker/
+#Multi Stage Dockerfile https://spring.io/guides/topicals/spring-boot-docker/
 
 ARG SERVICE=workout
 
@@ -16,6 +16,8 @@ RUN mkdir -p ${SERVICE}/target/dependency && (cd ${SERVICE}/target/dependency; j
 
 #2nd Stage: Running the image
 FROM eclipse-temurin:17-jdk-alpine
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
 VOLUME /tmp
 ARG SERVICE
 ARG DEPENDENCY=/opt/app/${SERVICE}/target/dependency
