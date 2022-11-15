@@ -22,7 +22,6 @@
     <spring.boot.maven.plugin.version>2.7.5</spring.boot.maven.plugin.version>
     <spring.boot.dependencies.version>2.7.5</spring.boot.dependencies.version>
     <testcontainers.dependency.version>1.17.5</testcontainers.dependency.version>
-    <image>freaxy/${project.artifactId}:${project.version}</image>
   </properties>
 
   <dependencyManagement>
@@ -67,39 +66,6 @@
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>${spring.boot.maven.plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>com.google.cloud.tools</groupId>
-          <artifactId>jib-maven-plugin</artifactId>
-          <version>3.3.0</version>
-          <configuration>
-            <from>
-              <image>eclipse-temurin:17.0.4.1_1-jre</image>
-              <platforms>
-                <platform>
-                  <architecture>arm64</architecture>
-                  <os>linux</os>
-                </platform>
-                <platform>
-                  <architecture>amd64</architecture>
-                  <os>linux</os>
-                </platform>
-              </platforms>
-            </from>
-            <to>
-              <tags>
-                <tag>latest</tag>
-              </tags>
-            </to>
-          </configuration>
-          <executions>
-            <execution>
-              <phase>package</phase>
-              <goals>
-                <goal>build</goal>
-              </goals>
-            </execution>
-          </executions>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
