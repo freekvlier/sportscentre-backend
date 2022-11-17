@@ -14,11 +14,11 @@ services:
       - mongo
     restart: unless-stopped
 
-  workout:
+  workout-service:
     container_name: workout-service
     build:
       context: .
-      dockerfile: docker/Workout/
+      dockerfile: docker/workout-service/Dockerfile
     ports:
       - "8080:8080"
     environment:

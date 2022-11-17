@@ -1,6 +1,6 @@
 #Multi Stage Dockerfile https://spring.io/guides/topicals/spring-boot-docker/
 
-ARG SERVICE=workout
+ARG SERVICE=workout-service
 
 #1st Stage: Building the image
 FROM maven:3.8.6-eclipse-temurin-17-alpine as build
