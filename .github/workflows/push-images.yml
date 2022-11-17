@@ -2,12 +2,11 @@ name: Build and push docker images
 
 on:
   push:
-    # branches:
-    #   - main
+    branches:
+      - main
 
 env:
   REGISTRY: ghcr.io
-
   IMAGE_NAME_: ${{ github.repository }}
 
 jobs:
@@ -31,7 +30,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          file: ./docker/workout-service/Dockerfile
+          file: ./docker/workout-service/Dockerfile-build-run
           context: .
           push: true
           tags: ${{ env.REGISTRY }}/${{ github.repository }}/workout-service:latest
