@@ -1,11 +1,11 @@
 name: Build & Test Services
-on: [push]
-
-#on:
-#  push:
-#    branches: [ dev ]
-#  pull_request:
-#    branches: [ master, dev ]
+on:
+  push:
+    branches:
+      - main
+      - development
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   build-test-workout-service:
