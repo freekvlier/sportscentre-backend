@@ -1,4 +1,3 @@
-#Workflow name
 name: Build & Test Services
 on: [push]
 
