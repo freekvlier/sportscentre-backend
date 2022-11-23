@@ -1,3 +1,4 @@
+version: '3.3'
 services:
   mongo:
     container_name: mongoDB
@@ -13,23 +14,22 @@ services:
       - mongo
     restart: unless-stopped
 
-  workout:
-    image: freaxy/workout:latest
-    container_name: workout
+  workout-service:
+    container_name: workout-service
+    build:
+      context: .
+      dockerfile: docker/workout-service/Dockerfile-run
     ports:
       - "8080:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
-      - spring
       - mongo
     depends_on:
       - mongo
 
 networks:
   mongo:
-    driver: bridge
-  spring:
     driver: bridge
 
 volumes:
