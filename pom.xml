@@ -27,7 +27,7 @@
 
   <profiles>
     <profile>
-      <id>coverage</id>
+      <id>sonarqube</id>
       <build>
         <plugins>
           <plugin>
