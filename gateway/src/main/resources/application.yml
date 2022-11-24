@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    title: gateway
+    version: 1.0
+    name: gateway
+
+
+  cloud:
+    gateway:
+      httpclient:
+        wiretap: true
+        httpserver:
+          wiretap: true
+        globalcors:
+          cors-configurations:
+            '[/**]':
+              allowedOrigins: "*"
+              allowedMethods: "*"
+
+      routes:
+        - id: workout--service
+          uri: http://workout--service:8081
+          predicates:
+            - Path=/workout/**
