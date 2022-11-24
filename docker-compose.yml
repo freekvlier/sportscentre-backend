@@ -20,12 +20,26 @@ services:
       context: .
       dockerfile: docker/workout-service/Dockerfile-run
     ports:
-      - "8080:8080"
+      - "8081:8081"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - mongo
     depends_on:
+      - mongo
+
+  gateway:
+    container_name: gateway
+    build:
+      context: .
+      dockerfile: docker/gateway/Dockerfile-run
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - workout-service
+    networks:
       - mongo
 
 networks:
