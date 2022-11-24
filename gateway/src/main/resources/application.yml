@@ -2,6 +2,8 @@ server:
   port: 8080
 
 spring:
+  main:
+    web-application-type: reactive
   application:
     title: gateway
     version: 1.0
@@ -21,7 +23,7 @@ spring:
               allowedMethods: "*"
 
       routes:
-        - id: workout--service
-          uri: http://workout--service:8081
+        - id: workout-service
+          uri: http://workout-service:8081
           predicates:
-            - Path=/workout/**
+            - Path=/**
