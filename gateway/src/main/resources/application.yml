@@ -2,15 +2,31 @@ server:
   port: 8080
 
 spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          azure-ad:
+            authorization-uri: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+            token-uri: https://login.microsoftonline.com/common/oauth2/v2.0/token
+            jwk-set-uri: https://login.microsoftonline.com/common/discovery/v2.0/keys
+        registration:
+          azure-client:
+            provider: azure-ad
+            client-id: 5d4df099-bb70-4887-8617-ee02e00ced9a
+            client-secret: OQh8Q~shElllADSRgxrkP~o4puiXIv5CfqFKKaZK
+            authorization-grant-type: authorization_code
+            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            scope: openid,profile
   main:
     web-application-type: reactive
+    allow-bean-definition-overriding: true
+
   application:
     title: gateway
     version: 1.0
     name: gateway
 
-
-  cloud:
     gateway:
       httpclient:
         wiretap: true
