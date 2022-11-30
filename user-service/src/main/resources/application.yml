@@ -1,0 +1,10 @@
+server:
+    port: 8081
+
+spring:
+    application:
+      name: user-service
+      data:
+        mongodb:
+          uri: mongodb://mongo-user:user@user:27017
+          database: user

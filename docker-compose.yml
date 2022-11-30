@@ -12,18 +12,32 @@ services:
     networks:
       - mongo
 
-  mongo:
+  user-service:
+    container_name: user-service
+    build:
+      context: .
+      dockerfile: docker/user-service/Dockerfile-run
+    ports:
+      - 8081:8081
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - user-network
+    depends_on:
+      - mongo-user
+
+  mongo-user:
     container_name: mongoDB
     image: mongo:6.0.2
     environment:
-      MONGO_INITDB_ROOT_USERNAME: mongo
-      MONGO_INITDB_ROOT_PASSWORD: mongo
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: user
     volumes:
       - mongo:/data/db
     ports:
       - 27017:27017
     networks:
-      - mongo
+      - user-network
     restart: unless-stopped
 
   workout-service:
@@ -32,17 +46,34 @@ services:
       context: .
       dockerfile: docker/workout-service/Dockerfile-run
     ports:
-      - 8081:8081
+      - 8082:8082
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
-      - mongo
+      - workout-network
     depends_on:
-      - mongo
+      - mongo-workout
+
+  mongo-workout:
+    container_name: mongoDB
+    image: mongo:6.0.2
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: workout
+      MONGO_INITDB_ROOT_PASSWORD: workout
+    volumes:
+      - mongo:/data/db
+    ports:
+      - 27018:27017
+    networks:
+      - workout-network
+    restart: unless-stopped
 
 networks:
-  mongo:
+  user-network:
     driver: bridge
+  workout-network:
+    driver: bridge
+
 
 volumes:
   mongo:
