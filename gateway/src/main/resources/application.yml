@@ -4,20 +4,11 @@ server:
 spring:
   security:
     oauth2:
-      client:
-        provider:
-          azure-ad:
-            authorization-uri: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
-            token-uri: https://login.microsoftonline.com/common/oauth2/v2.0/token
-            jwk-set-uri: https://login.microsoftonline.com/common/discovery/v2.0/keys
-        registration:
-          azure-client:
-            provider: azure-ad
-            client-id: 5d4df099-bb70-4887-8617-ee02e00ced9a
-            client-secret: OQh8Q~shElllADSRgxrkP~o4puiXIv5CfqFKKaZK
-            authorization-grant-type: authorization_code
-            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
-            scope: openid,profile
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://login.microsoftonline.com/644617e7-1801-4ee3-838c-2765e373cfde/discovery/v2.0/keys
+          issuer-uri: https://login.microsoftonline.com/644617e7-1801-4ee3-838c-2765e373cfde/v2.0
+
   main:
     web-application-type: reactive
     allow-bean-definition-overriding: true
@@ -40,6 +31,6 @@ spring:
 
       routes:
         - id: workout-service
-          uri: http://workout-service:8081
+          uri: http://localhost:8081
           predicates:
             - Path=/**
