@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/workout")
 @Slf4j
 @AllArgsConstructor
+@RequestMapping("workout")
 public class WorkoutController {
 
     private final WorkoutService workoutService;
@@ -29,5 +29,12 @@ public class WorkoutController {
     public List<WorkoutResponse> GetAllWorkouts(){
         log.info("Get All Workouts");
         return workoutService.getAll();
+    }
+
+    @RequestMapping("/test")
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public String test(){
+        return "test";
     }
 }
