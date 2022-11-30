@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @AllArgsConstructor
+@RequestMapping("workout")
 public class WorkoutController {
 
     private final WorkoutService workoutService;
