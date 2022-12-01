@@ -1,29 +1,29 @@
 package com.service.user.dto;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.gson.Gson;
 import com.service.user.model.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.UnsupportedEncodingException;
 
-@Data
+@Getter
+@Setter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserRequest {
-    public String oid;
+    public String id;
+    public String email;
     public String name;
 
-    public UserRequest(String token) throws UnsupportedEncodingException {
-        String[] pieces = token.substring(6).split("\\.");
-        String b64payload = pieces[1];
-        String jsonString = new String(Base64.decodeBase64(b64payload), "UTF-8");
-        UserRequest test = new Gson().fromJson(jsonString, UserRequest.class);
-        this.oid = test.getOid();
-        this.name = test.getName();
+    public UserRequest(String bearer) {
+        DecodedJWT decodedJWT = JWT.decode(bearer.substring(7));
+        this.id = decodedJWT.getClaim("oid").asString();
+        this.email = decodedJWT.getClaim("preferred_username").asString();
+        this.name = decodedJWT.getClaim("name").asString();
     }
 }

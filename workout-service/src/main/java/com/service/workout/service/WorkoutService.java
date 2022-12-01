@@ -17,11 +17,12 @@ public class WorkoutService {
 
     private final IWorkoutRepository workoutRepository;
 
-    public void create(WorkoutRequest request) {
+    public void create(String userId, WorkoutRequest request) {
         Workout workout = Workout.builder()
                 .name(request.getName())
                 .exercises(request.getExercises())
                 .date(request.getDate())
+                .user_id(userId)
                 .build();
 
         // Todo check data

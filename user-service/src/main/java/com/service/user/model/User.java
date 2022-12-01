@@ -5,17 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    public String oid;
+    public String id;
+    public String email;
     public String name;
 
     public User(UserRequest userRequest) {
-        this.oid = userRequest.getOid();
+        this.id = userRequest.getId();
+        this.email = userRequest.getEmail();
         this.name = userRequest.getName();
     }
 }
