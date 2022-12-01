@@ -9,8 +9,6 @@ services:
       - 8080:8080
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-    networks:
-      - mongo
 
   user-service:
     container_name: user-service
@@ -27,18 +25,18 @@ services:
       - mongo-user
 
   mongo-user:
-    container_name: mongoDB
+    container_name: mongo-user
     image: mongo:6.0.2
     environment:
       MONGO_INITDB_ROOT_USERNAME: user
       MONGO_INITDB_ROOT_PASSWORD: user
     volumes:
-      - mongo:/data/db
+      - mongo-user:/data/db
     ports:
       - 27017:27017
     networks:
       - user-network
-    restart: unless-stopped
+#    restart: unless-stopped
 
   workout-service:
     container_name: workout-service
@@ -55,18 +53,18 @@ services:
       - mongo-workout
 
   mongo-workout:
-    container_name: mongoDB
+    container_name: mongo-workout
     image: mongo:6.0.2
     environment:
       MONGO_INITDB_ROOT_USERNAME: workout
       MONGO_INITDB_ROOT_PASSWORD: workout
     volumes:
-      - mongo:/data/db
-    ports:
-      - 27018:27017
+      - mongo-workout:/data/db
+#    ports:
+#      - 27017:27017
     networks:
       - workout-network
-    restart: unless-stopped
+#    restart: unless-stopped
 
 networks:
   user-network:
@@ -76,4 +74,5 @@ networks:
 
 
 volumes:
-  mongo:
+  mongo-user:
+  mongo-workout:

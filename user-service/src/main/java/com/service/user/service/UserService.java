@@ -30,10 +30,11 @@ public class UserService {
     }
 
     public User login(String token) throws UnsupportedEncodingException {
-//        if(isFirstLogin()){
-//            userRepository.save(user);
-//        }
-        UserRequest user = decodeJWT(token);
+        UserRequest user = new UserRequest(token);
+        if(userRepository.findByOid(user.oid) == null){
+            userRepository.save(new User(user));
+        }
+
         return userRepository.findByOid(user.oid);
     }
 }

@@ -4,7 +4,7 @@ server:
 spring:
     application:
       name: user-service
-      data:
-        mongodb:
-          uri: mongodb://mongo-user:user@user:27017
-          database: user
+    data:
+      mongodb:
+        uri: mongodb://user:user@mongo-user:27017
+        database: user

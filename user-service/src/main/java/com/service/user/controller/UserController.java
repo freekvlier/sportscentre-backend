@@ -1,5 +1,6 @@
 package com.service.user.controller;
 
+import com.service.user.model.User;
 import com.service.user.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,10 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/login/check")
-    public void isFirstLogin(@RequestHeader (name="Authorization") String token) throws IllegalAccessException, ParseException, UnsupportedEncodingException {
-//        Object user = SecurityContextHolder.getContext().getAuthentication()
-//                .getPrincipal();
-        userService.login(token);
-
+    public User isFirstLogin(@RequestHeader (name="Authorization") String token) throws IllegalAccessException, ParseException, UnsupportedEncodingException {
+        return userService.login(token);
     }
 }

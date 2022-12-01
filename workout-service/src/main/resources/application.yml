@@ -6,6 +6,6 @@ spring:
       name: workout-service
     data:
       mongodb:
-        uri: mongodb://mongo-workout:workout@workout:27018
+        uri: mongodb://workout:workout@mongo-workout:27017
         database: workout
         
