@@ -14,7 +14,6 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document("workouts")
 public class Workout {
 
     @Id
@@ -22,4 +21,5 @@ public class Workout {
     private String name;
     private List<Exercise> exercises;
     private Date date;
+    private String user_id;
 }

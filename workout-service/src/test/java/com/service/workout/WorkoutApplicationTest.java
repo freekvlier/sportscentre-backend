@@ -5,6 +5,7 @@ import com.service.workout.dto.WorkoutRequest;
 import com.service.workout.model.Exercise;
 import com.service.workout.model.Workout;
 import com.service.workout.repository.IWorkoutRepository;
+import io.jsonwebtoken.Jwts;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,10 @@ public class WorkoutApplicationTest {
         dymDynamicPropertyRegistry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
     }
 
+    private String generateMockBearer() {
+        return "Bearer " + Jwts.builder().claim("oid", "1").compact();
+    }
+
     @Test
     void shouldCreateWorkout() throws Exception {
         //Arrange
@@ -55,6 +60,7 @@ public class WorkoutApplicationTest {
 
         //Act
         mockMvc.perform(MockMvcRequestBuilders.post("/workout")
+                .header("Authorization", generateMockBearer())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(workoutRequestJson))
                 .andExpect(status().isCreated());

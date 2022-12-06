@@ -50,7 +50,7 @@ public class WorkoutServiceTest {
                 .build();;
 
         //Act
-        workoutService.create(workout);
+        workoutService.create("1", workout);
 
         //Assert
         Mockito.verify(workoutRepository, Mockito.times(1)).save(workoutArgumentCaptor.capture());

@@ -2,6 +2,7 @@ package com.service.workout.controller;
 
 import com.service.workout.dto.WorkoutRequest;
 import com.service.workout.dto.WorkoutResponse;
+import com.service.workout.service.BearerService;
 import com.service.workout.service.WorkoutService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,11 +18,12 @@ import java.util.List;
 public class WorkoutController {
 
     private final WorkoutService workoutService;
+    private final BearerService bearerService;
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createWorkout(@RequestBody WorkoutRequest request){
-        log.info("Workoutcontroller: New Workout Create request {]", request);
-        workoutService.create(request);
+    public void createWorkout(@RequestHeader (name="Authorization") String bearer, @RequestBody WorkoutRequest workout){
+        log.info("Workoutcontroller: New Workout Create request {]", workout);
+        workoutService.create(bearerService.getUserId(bearer), workout);
     }
 
     @GetMapping

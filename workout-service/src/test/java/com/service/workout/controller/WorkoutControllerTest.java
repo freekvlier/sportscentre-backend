@@ -2,6 +2,7 @@ package com.service.workout.controller;
 
 
 import com.service.workout.dto.WorkoutResponse;
+import com.service.workout.service.BearerService;
 import com.service.workout.service.WorkoutService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -27,12 +28,10 @@ public class WorkoutControllerTest {
     @MockBean
     private WorkoutService workoutService;
 
+    @MockBean
+    private BearerService bearerService;
     @Autowired
     private MockMvc mockMvc;
-
-//    @Test
-//    void createWorkout() {
-//    }
 
     @Test
     void getAllWorkouts() throws Exception {
