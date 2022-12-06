@@ -37,4 +37,9 @@ public class UserController {
     public User isFirstLogin(@RequestHeader(name="Authorization") String bearer) throws UnsupportedEncodingException {
         return userService.login(bearer);
     }
+
+    @DeleteMapping("/{userid}")
+    public boolean deleteUser(@RequestParam String userid) {
+        return userService.delete(userid);
+    }
 }

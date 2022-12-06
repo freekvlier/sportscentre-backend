@@ -29,4 +29,12 @@ public class UserService {
         }
         return userRepository.findById(user.getId()).orElse(null);
     }
+
+    public boolean delete(String userid) {
+        if(userRepository.findById(userid).isEmpty()){
+            userRepository.deleteById(userid);
+            return true;
+        }
+        return false;
+    }
 }
