@@ -4,7 +4,7 @@ server:
 spring:
   kafka:
     consumer:
-      group-id: group-1
+      group-id: workout-service
       auto-offset-reset: earliest
       bootstrap-servers: kafka:9092
 

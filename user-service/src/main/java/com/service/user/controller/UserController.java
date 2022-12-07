@@ -19,8 +19,6 @@ public class UserController {
 
     private final UserService userService;
 
-    final KafkaTemplate kafkaTemplate;
-
     @RequestMapping("/test")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -36,10 +34,5 @@ public class UserController {
     @DeleteMapping("/{userid}")
     public boolean deleteUser(@RequestParam String userid) {
         return userService.delete(userid);
-    }
-
-    @GetMapping("/kafka")
-    public void kafka() {
-        this.kafkaTemplate.send("transaction-1", "test");
     }
 }

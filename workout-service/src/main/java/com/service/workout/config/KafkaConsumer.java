@@ -10,9 +10,9 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 @Configuration
-public class Consumer {
+public class KafkaConsumer {
     final KafkaProperties kafkaProperties;
-    public Consumer(KafkaProperties kafkaProperties) {
+    public KafkaConsumer(KafkaProperties kafkaProperties) {
         this.kafkaProperties = kafkaProperties;
     }
     @Bean

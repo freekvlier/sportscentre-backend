@@ -15,9 +15,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class Producer {
+public class KafkaProducer {
     final KafkaProperties kafkaProperties;
-    public Producer(KafkaProperties kafkaProperties) {
+    public KafkaProducer(KafkaProperties kafkaProperties) {
         this.kafkaProperties = kafkaProperties;
     }
     @Bean
@@ -37,6 +37,6 @@ public class Producer {
     }
     @Bean
     public NewTopic topic() {
-        return new NewTopic("transaction-1", 2, (short) 1);
+        return new NewTopic("user-deletion", 2, (short) 1);
     }
 }

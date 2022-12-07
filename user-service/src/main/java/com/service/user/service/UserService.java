@@ -7,6 +7,7 @@ import com.service.user.repository.IUserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
@@ -17,6 +18,7 @@ import java.io.UnsupportedEncodingException;
 public class UserService {
 
     private final IUserRepository userRepository;
+    final KafkaTemplate kafkaTemplate;
 
     private boolean isFirstLogin(){
         return true;
@@ -33,6 +35,7 @@ public class UserService {
     public boolean delete(String userid) {
         if(userRepository.findById(userid).isEmpty()){
             userRepository.deleteById(userid);
+            kafkaTemplate.send("user-deletion", userid); //Emit user deletion event
             return true;
         }
         return false;
