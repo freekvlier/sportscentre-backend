@@ -21,8 +21,10 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - user-network
+      - kafka-network
     depends_on:
       - mongo-user
+      - kafka
 
   mongo-user:
     container_name: mongo-user
@@ -36,6 +38,7 @@ services:
 #      - 27017:27017
     networks:
       - user-network
+      - kafka-network
 #    restart: unless-stopped
 
   workout-service:
@@ -49,8 +52,10 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - workout-network
+      - kafka-network
     depends_on:
       - mongo-workout
+      - kafka
 
   mongo-workout:
     container_name: mongo-workout
@@ -64,12 +69,35 @@ services:
 #      - 27017:27017
     networks:
       - workout-network
+      - kafka-network
 #    restart: unless-stopped
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    networks:
+      - kafka-network
+
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+    depends_on:
+      - zookeeper
+    networks:
+      - kafka-network
 
 networks:
   user-network:
     driver: bridge
   workout-network:
+    driver: bridge
+  kafka-network:
     driver: bridge
 
 

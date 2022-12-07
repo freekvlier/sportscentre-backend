@@ -7,6 +7,8 @@ import com.service.workout.service.WorkoutService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,5 +40,10 @@ public class WorkoutController {
     @ResponseStatus(HttpStatus.OK)
     public String test(){
         return "test";
+    }
+
+    @KafkaListener(topics = "transaction-1")
+    public void listener(@Payload String string) {
+        System.out.println("MESSAGE RECEIVED: " + string);
     }
 }
