@@ -4,8 +4,6 @@ server:
 spring:
   kafka:
     bootstrap-servers: kafka:9092
-    producer:
-      bootstrap-servers: kafka:9092
 
   application:
     name: user-service
