@@ -1,0 +1,18 @@
+server:
+    port: 8082
+
+spring:
+  kafka:
+    consumer:
+      group-id: workout-service
+      auto-offset-reset: earliest
+      bootstrap-servers: kafka:9092
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: workout-service
+  data:
+    mongodb:
+      uri: mongodb://workout:workout@mongo-workout:27017
+      database: workout
+        
