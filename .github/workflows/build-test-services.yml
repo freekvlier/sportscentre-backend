@@ -8,6 +8,26 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
+  build-test-gateway:
+    name: Build and test gateway
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '17'
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build package
+        run: mvn -B package -DskipTests --file gateway/pom.xml
+      - name: Run Unit + Integration Tests
+        run: mvn -B test --file gateway/pom.xml
+
   build-test-workout-service:
     name: Build and test workout-service
     runs-on: ubuntu-latest
@@ -27,4 +47,24 @@ jobs:
         run: mvn -B package -DskipTests --file workout-service/pom.xml
       - name: Run Unit + Integration Tests
         run: mvn -B test --file workout-service/pom.xml
+        
+  build-test-user-service:
+    name: Build and test user-service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '17'
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build package
+        run: mvn -B package -DskipTests --file user-service/pom.xml
+      - name: Run Unit + Integration Tests
+        run: mvn -B test --file user-service/pom.xml
 
