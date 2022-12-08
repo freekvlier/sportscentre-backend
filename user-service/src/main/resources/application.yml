@@ -2,9 +2,12 @@ server:
     port: 8081
 
 spring:
-    application:
-      name: user-service
-    data:
-      mongodb:
-        uri: mongodb://user:user@mongo-user:27017
-        database: user
+  kafka:
+    bootstrap-servers: kafka:9092
+
+  application:
+    name: user-service
+  data:
+    mongodb:
+      uri: mongodb://user:user@mongo-user:27017
+      database: user
