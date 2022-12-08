@@ -7,11 +7,9 @@ FROM maven:3.8.6-eclipse-temurin-17-alpine as build
 WORKDIR /opt/app
 ARG SERVICE
 
-COPY pom.xml .
-COPY ${SERVICE}/pom.xml ${SERVICE}/pom.xml
-COPY ${SERVICE}/src ${SERVICE}/src
+COPY . .
 
-RUN mvn install -DskipTests
+RUN mvn install -pl ${SERVICE} -am -DskipTests
 RUN mkdir -p ${SERVICE}/target/dependency && (cd ${SERVICE}/target/dependency; jar -xf ../*.jar)
 
 #2nd Stage: Running the image
