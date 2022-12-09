@@ -16,13 +16,13 @@ spring:
     gateway:
       routes:
         - id: user-service
-          uri: http://user-service:8081
+          uri: http://user-service
           predicates:
             - Path=/user/**
           filters:
             - RewritePath=/user/(?<segment>.*), /$\{segment}
         - id: workout-service
-          uri: http://workout-service:8082
+          uri: http://workout-service
           predicates:
             - Path=/workout/**
           filters:
