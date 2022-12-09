@@ -1,14 +1,14 @@
 version: '3.3'
 services:
-#  gateway:
-#    container_name: gateway
-#    build:
-#      context: .
-#      dockerfile: docker/gateway/Dockerfile-run
-#    ports:
-#      - 8080:8080
-#    environment:
-#      - SPRING_PROFILES_ACTIVE=docker
+  gateway:
+    container_name: gateway
+    build:
+      context: .
+      dockerfile: docker/gateway/Dockerfile-run
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
 
   user-service:
     container_name: user-service
