@@ -121,14 +121,12 @@ metadata:
     app: zookeeper
   name: zookeeper
 spec:
-  type: NodePort
   ports:
-    - name: zookeeper-port
-      port: 2181
-      nodePort: 30181
+    - port: 2181
       targetPort: 2181
   selector:
     app: zookeeper
+    tier: backend
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -162,8 +160,10 @@ metadata:
 spec:
   ports:
     - port: 9092
+      targetPort: 9092
   selector:
     app: kafka
+    tier: backend
 ---
 apiVersion: apps/v1
 kind: Deployment
