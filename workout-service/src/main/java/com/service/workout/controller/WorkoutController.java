@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @AllArgsConstructor
-@RequestMapping("workout")
+//@RequestMapping("workout")
 public class WorkoutController {
 
     private final WorkoutService workoutService;

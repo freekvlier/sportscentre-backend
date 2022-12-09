@@ -2,35 +2,32 @@ server:
   port: 8080
 
 spring:
+  application:
+    title: gateway
+    version: 1.0
+    name: gateway
   security:
     oauth2:
       resourceserver:
         jwt:
           jwk-set-uri: https://login.microsoftonline.com/644617e7-1801-4ee3-838c-2765e373cfde/discovery/v2.0/keys
           issuer-uri: https://login.microsoftonline.com/644617e7-1801-4ee3-838c-2765e373cfde/v2.0
-
-  main:
-    web-application-type: reactive
-    allow-bean-definition-overriding: true
-
-  application:
-    title: gateway
-    version: 1.0
-    name: gateway
-
+  cloud:
     gateway:
-      httpclient:
-        wiretap: true
-        httpserver:
-          wiretap: true
-        globalcors:
-          cors-configurations:
-            '[/**]':
-              allowedOrigins: "*"
-              allowedMethods: "*"
-
       routes:
-        - id: workout-service
+        - id: user-service
           uri: http://localhost:8081
           predicates:
-            - Path=/**
+            - Path=/user/**
+          filters:
+            - RewritePath=/user/(?<segment>.*), /$\{segment}
+        - id: workout-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/workout/**
+          filters:
+            - RewritePath=/workout/(?<segment>.*), /$\{segment}
+
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: reactive
