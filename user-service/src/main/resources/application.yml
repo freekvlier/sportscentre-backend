@@ -3,7 +3,7 @@ server:
 
 spring:
   kafka:
-    bootstrap-servers: kafka:9092
+    bootstrap-servers: http://kafka:9092
 
   application:
     name: user-service
