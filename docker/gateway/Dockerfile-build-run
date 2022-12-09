@@ -7,11 +7,9 @@ FROM maven:3.8.6-eclipse-temurin-17-alpine as build
 WORKDIR /opt/app
 ARG SERVICE
 
-COPY pom.xml .
-COPY ${SERVICE}/pom.xml ${SERVICE}/pom.xml
-COPY ${SERVICE}/src ${SERVICE}/src
+COPY . .
 
-RUN mvn install -DskipTests
+RUN mvn install -pl ${SERVICE} -am -DskipTests
 RUN mkdir -p ${SERVICE}/target/dependency && (cd ${SERVICE}/target/dependency; jar -xf ../*.jar)
 
 #2nd Stage: Running the image
@@ -24,4 +22,5 @@ ARG DEPENDENCY=/opt/app/${SERVICE}/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
-ENTRYPOINT ["java","-cp","app:app/lib/*","com.sportscentre.GatewayApplication"]
+
+ENTRYPOINT ["java","-cp","app:app/lib/*","com.sportscentre.gateway.GatewayApplication"]

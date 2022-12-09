@@ -14,7 +14,7 @@ import java.io.UnsupportedEncodingException;
 @RestController
 @Slf4j
 @AllArgsConstructor
-@RequestMapping("user")
+//@RequestMapping("user")
 public class UserController {
 
     private final UserService userService;
