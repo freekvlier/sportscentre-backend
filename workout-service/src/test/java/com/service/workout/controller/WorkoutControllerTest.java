@@ -53,7 +53,7 @@ public class WorkoutControllerTest {
         Mockito.when(workoutService.getAll()).thenReturn(asList(workoutRequest1, workoutRequest2));
 
         // Act/AssertW
-        mockMvc.perform(get("/workout"))
+        mockMvc.perform(get("/"))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.size()", Matchers.is(2)))

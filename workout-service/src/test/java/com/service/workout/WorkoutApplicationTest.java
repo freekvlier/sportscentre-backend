@@ -65,7 +65,7 @@ public class WorkoutApplicationTest {
         String workoutRequestJson = objectMapper.writeValueAsString(workoutRequest);
 
         //Act
-        mockMvc.perform(MockMvcRequestBuilders.post("/workout")
+        mockMvc.perform(MockMvcRequestBuilders.post("/")
                 .header("Authorization", generateMockBearer())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(workoutRequestJson))
@@ -86,7 +86,7 @@ public class WorkoutApplicationTest {
         Integer workoutsCount = workoutRepository.findAll().size();
 
         //Act/Assert
-        mockMvc.perform(MockMvcRequestBuilders.get("/workout"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(workoutsCount)));
     }
