@@ -35,7 +35,7 @@ public class UserService {
     public boolean delete(String userid) {
         if(userRepository.findById(userid).isEmpty()){
             userRepository.deleteById(userid);
-            kafkaTemplate.send("user-deletion", userid); //Emit user deletion event
+//            kafkaTemplate.send("user-deletion", userid); //Emit user deletion event
             return true;
         }
         return false;

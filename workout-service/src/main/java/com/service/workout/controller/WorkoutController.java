@@ -42,9 +42,9 @@ public class WorkoutController {
         return "test";
     }
 
-    @KafkaListener(topics = "user-deletion")
-    public void listener(@Payload String userId) {
-        System.out.println("Deleted user: " + userId);
-        //Remove all user related workouts
-    }
+//    @KafkaListener(topics = "user-deletion")
+//    public void listener(@Payload String userId) {
+//        System.out.println("Deleted user: " + userId);
+//        //Remove all user related workouts
+//    }
 }

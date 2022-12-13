@@ -65,6 +65,7 @@ spec:
       containers:
         - name: workout-service
           image: ghcr.io/freaxy123/sportscentre/workout-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8082
 ---
@@ -98,6 +99,7 @@ spec:
       containers:
         - name: workout-service
           image: ghcr.io/freaxy123/sportscentre/user-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8081
 ---
