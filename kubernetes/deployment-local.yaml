@@ -159,7 +159,7 @@ spec:
             - name: ZOOKEEPER_SERVER_1
               value: zookeeper
           name: zookeeper
-          image: wurstmeister/zookeeper
+          image: bitnami/zookeeper:3.6.3
           ports:
             - containerPort: 2181
 ---
@@ -198,6 +198,6 @@ spec:
             - name: KAFKA_CREATE_TOPICS
               value: user-deletion:1:1
           name: kafka
-          image: wurstmeister/kafka
+          image: bitnami/kafka:3.0
           ports:
             - containerPort: 9092
