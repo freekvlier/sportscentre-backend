@@ -11,3 +11,8 @@ spring:
     mongodb:
       uri: mongodb://user:user@mongo-user:27017
       database: user
+
+mongodb.encrypt:
+  keys:
+    - version: 1
+      key: hqHKBLV83LpCqzKpf8OvutbCs+O5wX5BPu3btWpEvXA=
