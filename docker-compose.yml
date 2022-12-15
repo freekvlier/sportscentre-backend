@@ -34,8 +34,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: user
     volumes:
       - mongo-user:/data/db
-#    ports:
-#      - 27017:27017
+    ports:
+      - 27017:27017
     networks:
       - user-network
       - kafka-network
@@ -65,8 +65,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: workout
     volumes:
       - mongo-workout:/data/db
-#    ports:
-#      - 27017:27017
+    ports:
+      - 27018:27017
     networks:
       - workout-network
       - kafka-network
