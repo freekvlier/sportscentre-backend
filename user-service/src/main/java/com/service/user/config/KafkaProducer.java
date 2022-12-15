@@ -35,8 +35,8 @@ public class KafkaProducer {
     KafkaTemplate<String, Object> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
-//    @Bean
-//    public NewTopic topic() {
-//        return new NewTopic("user-deletion", 2, (short) 1);
-//    }
+    @Bean
+    public NewTopic topic() {
+        return new NewTopic("user-deletion", 2, (short) 1);
+    }
 }

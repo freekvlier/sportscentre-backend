@@ -6,7 +6,7 @@ spring:
     consumer:
       group-id: workout-service
       auto-offset-reset: earliest
-      bootstrap-servers: kafka:9092
+      bootstrap-servers: my-cluster-kafka-bootstrap:9092
   main:
     allow-bean-definition-overriding: true
   application:
