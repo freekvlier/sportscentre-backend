@@ -18,28 +18,12 @@ services:
     ports:
       - 8081:8081
     environment:
-      - SPRING_PROFILES_ACTIVE=development
+      - SPRING_PROFILES_ACTIVE=production
     networks:
       - user-network
       - kafka-network
     depends_on:
-      - mongo-user
       - kafka
-
-  mongo-user:
-    container_name: mongo-user
-    image: mongo:6.0.2
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: user
-      MONGO_INITDB_ROOT_PASSWORD: user
-    volumes:
-      - mongo-user:/data/db
-    ports:
-      - 27017:27017
-    networks:
-      - user-network
-      - kafka-network
-#    restart: unless-stopped
 
   workout-service:
     container_name: workout-service
@@ -49,28 +33,12 @@ services:
     ports:
       - 8082:8082
     environment:
-      - SPRING_PROFILES_ACTIVE=development
+      - SPRING_PROFILES_ACTIVE=production
     networks:
       - workout-network
       - kafka-network
     depends_on:
-      - mongo-workout
       - kafka
-
-  mongo-workout:
-    container_name: mongo-workout
-    image: mongo:6.0.2
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: workout
-      MONGO_INITDB_ROOT_PASSWORD: workout
-    volumes:
-      - mongo-workout:/data/db
-    ports:
-      - 27018:27017
-    networks:
-      - workout-network
-      - kafka-network
-#    restart: unless-stopped
 
   zookeeper:
     image: wurstmeister/zookeeper
@@ -99,8 +67,3 @@ networks:
     driver: bridge
   kafka-network:
     driver: bridge
-
-
-volumes:
-  mongo-user:
-  mongo-workout:
