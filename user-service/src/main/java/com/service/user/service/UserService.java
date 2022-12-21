@@ -32,14 +32,14 @@ public class UserService {
         return userRepository.findById(user.getId()).orElse(null);
     }
 
-    public boolean delete(String userid) {
+    public boolean delete() {
 //        if(userRepository.findById(userid).isEmpty()){
 //            userRepository.deleteById(userid);
 //            kafkaTemplate.send("user-deletion", userid); //Emit user deletion event
 //            return true;
 //        }
 //        return false;
-        kafkaTemplate.send("user-deletion", userid); //Emit user deletion event
+        kafkaTemplate.send("user-deletion", "userid"); //Emit user deletion event
         return true;
     }
 }
