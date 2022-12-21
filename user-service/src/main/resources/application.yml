@@ -17,7 +17,7 @@ spring:
     activate:
       on-profile: production
   kafka:
-    bootstrap-servers: kafka:9092
+    bootstrap-servers: kafka-service:9092
   data:
     mongodb:
       uri: mongodb+srv://Dizziness1959:5hLJx9%25%23AiW%5E%24m@sportscentre.hn5hb73.mongodb.net/?retryWrites=true&w=majority

@@ -14,7 +14,7 @@ spec:
     tier: backend
   type: LoadBalancer
 ---
-apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gateway
@@ -32,10 +32,13 @@ spec:
     spec:
       containers:
         - name: gateway
-          image: ghcr.io/freaxy123/sportscentre/gateway:latest
+          image: ghcr.io/freekvlier/sportscentre/gateway:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          env:
+            - name: spring_profiles_active
+              value: production
 ---
 apiVersion: v1
 kind: Service
@@ -53,7 +56,7 @@ spec:
     tier: backend
 
 ---
-apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: workout-service
@@ -71,9 +74,12 @@ spec:
     spec:
       containers:
         - name: workout-service
-          image: ghcr.io/freaxy123/sportscentre/workout-service:latest
+          image: ghcr.io/freekvlier/sportscentre/workout-service:latest
           ports:
             - containerPort: 8082
+          env:
+            - name: spring_profiles_active
+              value: production
 ---
 apiVersion: v1
 kind: Service
@@ -91,7 +97,7 @@ spec:
     tier: backend
 
 ---
-apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: user-service
@@ -109,11 +115,13 @@ spec:
     spec:
       containers:
         - name: workout-service
-          image: ghcr.io/freaxy123/sportscentre/user-service:latest
+          image: ghcr.io/freekvlier/sportscentre/user-service:latest
           ports:
             - containerPort: 8081
+          env:
+            - name: spring_profiles_active
+              value: production
 ---
-#Kafka
 apiVersion: v1
 kind: Service
 metadata:
