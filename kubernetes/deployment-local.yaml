@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: gateway
   labels:
-    app: redis
+    app: gateway
     tier: backend
 spec:
   ports:
@@ -38,7 +38,7 @@ spec:
             - containerPort: 8080
           env:
             - name: spring_profiles_active
-              value: production
+              value: kubernetes
 ---
 apiVersion: v1
 kind: Service
@@ -79,7 +79,7 @@ spec:
             - containerPort: 8082
           env:
             - name: spring_profiles_active
-              value: production
+              value: atlas
 ---
 apiVersion: v1
 kind: Service
@@ -95,7 +95,6 @@ spec:
   selector:
     app: user-service
     tier: backend
-  type: LoadBalancer
 
 ---
 apiVersion: apps/v1
@@ -121,7 +120,7 @@ spec:
             - containerPort: 8081
           env:
             - name: spring_profiles_active
-              value: production
+              value: atlas
 ---
 apiVersion: v1
 kind: Service
