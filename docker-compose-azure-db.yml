@@ -22,26 +22,10 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=production
     networks:
-      - user-network
       - kafka-network
       - gateway-network
     depends_on:
-      - mongo-user
       - kafka-service
-
-  mongo-user:
-    container_name: mongo-user
-    image: mongo:6.0.2
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: user
-      MONGO_INITDB_ROOT_PASSWORD: user
-    volumes:
-      - mongo-user:/data/db
-    ports:
-      - 27017:27017
-    networks:
-      - user-network
-#    restart: unless-stopped
 
   workout-service:
     container_name: workout-service
@@ -53,26 +37,10 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=production
     networks:
-      - workout-network
       - kafka-network
       - gateway-network
     depends_on:
-      - mongo-workout
       - kafka-service
-
-  mongo-workout:
-    container_name: mongo-workout
-    image: mongo:6.0.2
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: workout
-      MONGO_INITDB_ROOT_PASSWORD: workout
-    volumes:
-      - mongo-workout:/data/db
-    ports:
-      - 27018:27017
-    networks:
-      - workout-network
-#    restart: unless-stopped
 
   zookeeper-service:
     image: wurstmeister/zookeeper
@@ -88,22 +56,14 @@ services:
     environment:
       KAFKA_ADVERTISED_HOST_NAME: kafka-service
       KAFKA_ZOOKEEPER_CONNECT: zookeeper-service:2181
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
     depends_on:
       - zookeeper-service
     networks:
       - kafka-network
 
 networks:
-  user-network:
-    driver: bridge
-  workout-network:
+  gateway-network:
     driver: bridge
   kafka-network:
     driver: bridge
-  gateway-network:
-    driver: bridge
-
-volumes:
-  mongo-user:
-  mongo-workout:

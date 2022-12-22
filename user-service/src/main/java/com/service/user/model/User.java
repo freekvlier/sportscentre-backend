@@ -1,11 +1,11 @@
 package com.service.user.model;
 
+import com.bol.secure.Encrypted;
 import com.service.user.dto.UserRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Builder
@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 public class User {
     public String id;
+    @Encrypted
     public String email;
     public String name;
 

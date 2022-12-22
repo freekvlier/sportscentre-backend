@@ -1,18 +1,69 @@
-server:
-    port: 8082
-
 spring:
-  kafka:
-    consumer:
-      group-id: workout-service
-      auto-offset-reset: earliest
-      bootstrap-servers: kafka:9092
-  main:
-    allow-bean-definition-overriding: true
+  profiles:
+    active: development
   application:
     name: workout-service
+  kafka:
+      consumer:
+        group-id: workout-service
+        auto-offset-reset: earliest
+  main:
+      allow-bean-definition-overriding: true
+server:
+  port: 8082
+
+mongodb.encrypt:
+  keys:
+    - version: 1
+      key: hqHKBLV83LpCqzKpf8OvutbCs+O5wX5BPu3btWpEvXA=
+---
+spring:
+  config:
+    activate:
+      on-profile: atlas
+  kafka:
+    consumer:
+      bootstrap-servers:  kafka-service:9092
+  data:
+    mongodb:
+      uri: mongodb+srv://Dizziness1959:5hLJx9%25%23AiW%5E%24m@sportscentre.hn5hb73.mongodb.net/?retryWrites=true&w=majority
+      database: workout
+
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+  kafka:
+    consumer:
+      bootstrap-servers:  kafka-service:9092
   data:
     mongodb:
       uri: mongodb://workout:workout@mongo-workout:27017
       database: workout
-        
+
+---
+spring:
+  config:
+    activate:
+      on-profile: development
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+  data:
+    mongodb:
+      uri: mongodb://workout:workout@localhost:27017
+      database: workout
+
+---
+spring:
+  config:
+    activate:
+      on-profile: azure
+  kafka:
+    consumer:
+      bootstrap-servers: kafka-service:9092
+  data:
+    mongodb:
+      uri: mongodb://freekvanlier:KNlu83DMFNyutDCyq9p6olIHQo6uVtjh2uOq2iudQM7cfPOGhX42p1o4Z2aF6Y1Xohoqj7KxT6J7ACDby2nU1w==@freekvanlier.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@freekvanlier@
+      database: user

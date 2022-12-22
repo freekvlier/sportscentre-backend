@@ -19,8 +19,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @RequestMapping("/test")
-    @GetMapping
+    @GetMapping("/test")
     @ResponseStatus(HttpStatus.OK)
     public String test(){
         return "test";
@@ -31,8 +30,8 @@ public class UserController {
         return userService.login(bearer);
     }
 
-    @DeleteMapping("/{userid}")
-    public boolean deleteUser(@RequestParam String userid) {
-        return userService.delete(userid);
+    @DeleteMapping("/{userId}")
+    public boolean deleteUser(@PathVariable String userId) {
+        return userService.delete(userId);
     }
 }
