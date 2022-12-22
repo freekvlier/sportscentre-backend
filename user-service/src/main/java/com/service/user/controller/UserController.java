@@ -30,8 +30,8 @@ public class UserController {
         return userService.login(bearer);
     }
 
-    @DeleteMapping("/delete")
-    public boolean deleteUser() {
-        return userService.delete();
+    @DeleteMapping("/{userId}")
+    public boolean deleteUser(@PathVariable String userId) {
+        return userService.delete(userId);
     }
 }
