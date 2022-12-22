@@ -4,11 +4,11 @@ services:
     container_name: gateway
     build:
       context: .
-      dockerfile: docker/gateway/Dockerfile-build-run
+      dockerfile: docker/gateway/Dockerfile-run
     ports:
       - 8080:8080
     environment:
-      - SPRING_PROFILES_ACTIVE=production
+      - SPRING_PROFILES_ACTIVE=development
     networks:
       - gateway-network
 
@@ -16,11 +16,11 @@ services:
     container_name: user-service
     build:
       context: .
-      dockerfile: docker/user-service/Dockerfile-build-run
+      dockerfile: docker/user-service/Dockerfile-run
     ports:
       - 8081:8081
     environment:
-      - SPRING_PROFILES_ACTIVE=production
+      - SPRING_PROFILES_ACTIVE=development
     networks:
       - user-network
       - kafka-network
@@ -47,11 +47,11 @@ services:
     container_name: workout-service
     build:
       context: .
-      dockerfile: docker/workout-service/Dockerfile-build-run
+      dockerfile: docker/workout-service/Dockerfile-run
     ports:
       - 8082:8082
     environment:
-      - SPRING_PROFILES_ACTIVE=production
+      - SPRING_PROFILES_ACTIVE=development
     networks:
       - workout-network
       - kafka-network
@@ -103,6 +103,7 @@ networks:
     driver: bridge
   gateway-network:
     driver: bridge
+
 
 volumes:
   mongo-user:
