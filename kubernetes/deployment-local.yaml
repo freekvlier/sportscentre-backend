@@ -75,6 +75,7 @@ spec:
       containers:
         - name: workout-service
           image: ghcr.io/freekvlier/sportscentre/workout-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8082
           env:
@@ -116,6 +117,7 @@ spec:
       containers:
         - name: workout-service
           image: ghcr.io/freekvlier/sportscentre/user-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8081
           env:
