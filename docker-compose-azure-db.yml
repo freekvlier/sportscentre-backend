@@ -4,66 +4,66 @@ services:
     container_name: gateway
     build:
       context: .
-      dockerfile: docker/gateway/Dockerfile-run
+      dockerfile: docker/gateway/Dockerfile-build-run
     ports:
       - 8080:8080
     environment:
       - SPRING_PROFILES_ACTIVE=production
+    networks:
+      - gateway-network
 
   user-service:
     container_name: user-service
     build:
       context: .
-      dockerfile: docker/user-service/Dockerfile-run
+      dockerfile: docker/user-service/Dockerfile-build-run
     ports:
       - 8081:8081
     environment:
       - SPRING_PROFILES_ACTIVE=production
     networks:
-      - user-network
       - kafka-network
+      - gateway-network
     depends_on:
-      - kafka
+      - kafka-service
 
   workout-service:
     container_name: workout-service
     build:
       context: .
-      dockerfile: docker/workout-service/Dockerfile-run
+      dockerfile: docker/workout-service/Dockerfile-build-run
     ports:
       - 8082:8082
     environment:
       - SPRING_PROFILES_ACTIVE=production
     networks:
-      - workout-network
       - kafka-network
+      - gateway-network
     depends_on:
-      - kafka
+      - kafka-service
 
-  zookeeper:
+  zookeeper-service:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
     networks:
       - kafka-network
 
-  kafka:
+  kafka-service:
     image: wurstmeister/kafka
     ports:
       - "9092:9092"
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: kafka
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_HOST_NAME: kafka-service
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-service:2181
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
     depends_on:
-      - zookeeper
+      - zookeeper-service
     networks:
       - kafka-network
 
 networks:
-  user-network:
-    driver: bridge
-  workout-network:
+  gateway-network:
     driver: bridge
   kafka-network:
     driver: bridge
