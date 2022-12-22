@@ -8,7 +8,7 @@ services:
     ports:
       - 8080:8080
     environment:
-      - SPRING_PROFILES_ACTIVE=production
+      - SPRING_PROFILES_ACTIVE=development
 
   user-service:
     container_name: user-service
@@ -18,7 +18,7 @@ services:
     ports:
       - 8081:8081
     environment:
-      - SPRING_PROFILES_ACTIVE=production
+      - SPRING_PROFILES_ACTIVE=development
     networks:
       - user-network
       - kafka-network
@@ -49,7 +49,7 @@ services:
     ports:
       - 8082:8082
     environment:
-      - SPRING_PROFILES_ACTIVE=production
+      - SPRING_PROFILES_ACTIVE=development
     networks:
       - workout-network
       - kafka-network
@@ -99,6 +99,7 @@ networks:
     driver: bridge
   kafka-network:
     driver: bridge
+
 
 volumes:
   mongo-user:

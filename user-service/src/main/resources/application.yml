@@ -15,7 +15,7 @@ mongodb.encrypt:
 spring:
   config:
     activate:
-      on-profile: production
+      on-profile: atlas
   kafka:
     bootstrap-servers: kafka-service:9092
   data:
@@ -29,7 +29,19 @@ spring:
     activate:
       on-profile: development
   kafka:
-    bootstrap-servers: kafka:9092
+    bootstrap-servers: localhost:9092
+  data:
+    mongodb:
+      uri: mongodb://user:user@localhost:27017
+      database: user
+
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+  kafka:
+    bootstrap-servers: kafka-service:9092
   data:
     mongodb:
       uri: mongodb://user:user@mongo-user:27017
@@ -41,7 +53,7 @@ spring:
     activate:
       on-profile: azure
   kafka:
-    bootstrap-servers: kafka:9092
+    bootstrap-servers: kafka-service:9092
   data:
     mongodb:
       uri: mongodb://freekvanlier:KNlu83DMFNyutDCyq9p6olIHQo6uVtjh2uOq2iudQM7cfPOGhX42p1o4Z2aF6Y1Xohoqj7KxT6J7ACDby2nU1w==@freekvanlier.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@freekvanlier@
