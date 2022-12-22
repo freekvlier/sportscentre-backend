@@ -20,23 +20,23 @@ mongodb.encrypt:
 spring:
   config:
     activate:
-      on-profile: production
+      on-profile: atlas
   kafka:
     consumer:
-      bootstrap-servers:  kafka:9092
+      bootstrap-servers:  kafka-service:9092
   data:
     mongodb:
       uri: mongodb+srv://Dizziness1959:5hLJx9%25%23AiW%5E%24m@sportscentre.hn5hb73.mongodb.net/?retryWrites=true&w=majority
-      database: user
+      database: workout
 
 ---
 spring:
   config:
     activate:
-      on-profile: development
+      on-profile: production
   kafka:
     consumer:
-      bootstrap-servers: kafka:9092
+      bootstrap-servers:  kafka-service:9092
   data:
     mongodb:
       uri: mongodb://workout:workout@mongo-workout:27017
@@ -46,10 +46,23 @@ spring:
 spring:
   config:
     activate:
+      on-profile: development
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+  data:
+    mongodb:
+      uri: mongodb://workout:workout@localhost:27017
+      database: workout
+
+---
+spring:
+  config:
+    activate:
       on-profile: azure
   kafka:
     consumer:
-      bootstrap-servers: kafka:9092
+      bootstrap-servers: kafka-service:9092
   data:
     mongodb:
       uri: mongodb://freekvanlier:KNlu83DMFNyutDCyq9p6olIHQo6uVtjh2uOq2iudQM7cfPOGhX42p1o4Z2aF6Y1Xohoqj7KxT6J7ACDby2nU1w==@freekvanlier.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@freekvanlier@
