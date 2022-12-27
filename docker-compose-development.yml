@@ -1,3 +1,5 @@
+# This docker-compose file runs all the images based on the locally build packages
+# Also every service has a dedicated database container and everything is run on localhost
 version: '3.3'
 services:
   gateway:

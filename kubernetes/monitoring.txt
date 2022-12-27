@@ -1,1 +1,19 @@
 https://computingforgeeks.com/setup-prometheus-and-grafana-on-kubernetes/
+
+1. git clone https://github.com/prometheus-operator/kube-prometheus.git
+2. cd kube-prometheus
+3. kubectl create -f manifests/setup
+4. kubectl create -f manifests/
+
+Expose port:
+
+-- Kubernetes --
+5. kubectl --namespace monitoring port-forward svc/grafana 3000
+
+-- Minikube --
+5. kubectl patch svc grafana -n monitoring -p '{"spec": {"type": "NodePort"}}'
+6. minikube service grafana --url -n monitoring
+
+
+-- Remove --
+kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup
