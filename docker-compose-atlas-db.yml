@@ -1,3 +1,5 @@
+# This docker-compose file builds all services using a multistage dockerfile and puts all microservices in production mode
+# Also a MongoDB atlas database in the cloud is used
 version: '3.3'
 services:
   gateway:
