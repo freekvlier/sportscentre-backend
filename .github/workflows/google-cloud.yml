@@ -48,4 +48,7 @@ jobs:
       - name: Deploy
         run: |-
           kubectl apply -f kubernetes/
+          kubectl set image deployment.apps/gateway gateway=gateway:latest
+          kubectl set image deployment.apps/workout-service workout-service=workout-service:latest
+          kubectl set image deployment.apps/user-service user-service=user-service:latest
           kubectl get services -o wide
