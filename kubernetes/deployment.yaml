@@ -115,7 +115,7 @@ spec:
         tier: backend
     spec:
       containers:
-        - name: workout-service
+        - name: user-service
           image: ghcr.io/freekvlier/sportscentre/user-service:latest
           imagePullPolicy: Always
           ports:
