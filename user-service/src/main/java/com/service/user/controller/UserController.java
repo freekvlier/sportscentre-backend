@@ -22,7 +22,7 @@ public class UserController {
     @GetMapping("/test")
     @ResponseStatus(HttpStatus.OK)
     public String test(){
-        return "test";
+        return "usertest";
     }
 
     @GetMapping("/login/check")
