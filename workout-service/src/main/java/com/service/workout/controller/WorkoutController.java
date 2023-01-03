@@ -39,7 +39,7 @@ public class WorkoutController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public String test(){
-        return "test";
+        return "workouttest";
     }
 
     @KafkaListener(topics = "user-deletion")
