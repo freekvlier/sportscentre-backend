@@ -47,7 +47,9 @@ jobs:
       - name: Deploy
         run: |-
           kubectl apply -f kubernetes/
-          kubectl rollout restart
+          kubectl rollout restart deployment/gateway
+          kubectl rollout restart deployment/workout-service
+          kubectl rollout restart deployment/user-service
           kubectl get services -o wide
 #          kubectl set image deployment.apps/gateway gateway=ghcr.io/freekvlier/sportscentre/gateway:latest
 #          kubectl set image deployment.apps/workout-service workout-service=ghcr.io/freekvlier/sportscentre/workout-service:latest
