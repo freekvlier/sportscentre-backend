@@ -22,7 +22,7 @@ public class WorkoutService {
                 .name(request.getName())
                 .exercises(request.getExercises())
                 .date(request.getDate())
-                .user_id(userId)
+                .userId(userId)
                 .build();
 
         // Todo check data
@@ -34,6 +34,20 @@ public class WorkoutService {
         List<Workout> workouts = workoutRepository.findAll();
 
         return workouts.stream().map(this::mapToWorkoutResponse).toList();
+    }
+
+    public List<WorkoutResponse> getAllByUserId(String userId) {
+        List<Workout> workouts = workoutRepository.findAllByUserId(userId).orElse(null);
+
+        return workouts.stream().map(this::mapToWorkoutResponse).toList();
+    }
+
+    public void deleteAllUserRelatedWorkouts(String userid){
+        workoutRepository.deleteAllByUserId(userid);
+    }
+
+    public void deleteWorkout(String workoutid){
+        workoutRepository.deleteById(workoutid);
     }
 
     private WorkoutResponse mapToWorkoutResponse(Workout workout) {
