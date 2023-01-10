@@ -1,11 +1,11 @@
 name: Kubescape scanning for misconfigurations
 on:
   push:
-#    branches:
-#      - main
-#      - development
-#  pull_request:
-#    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - development
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
   kubescape:
     runs-on: ubuntu-latest
