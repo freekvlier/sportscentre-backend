@@ -2,6 +2,7 @@ package com.service.user.service;
 
 import com.google.gson.Gson;
 import com.service.user.dto.UserRequest;
+import com.service.user.dto.UserResponse;
 import com.service.user.model.User;
 import com.service.user.repository.IUserRepository;
 import lombok.AllArgsConstructor;
@@ -24,13 +25,19 @@ public class UserService {
         return true;
     }
 
-    public User login(String bearer) throws UnsupportedEncodingException {
+    public UserResponse login(String bearer) throws UnsupportedEncodingException {
         UserRequest user = new UserRequest(bearer);
         if(userRepository.findById(user.getId()).isEmpty()){
             userRepository.save(new User(user));
         }
-        return userRepository.findById(user.getId()).orElse(null);
+
+        return mapToUserResponse(userRepository.findById(user.getId()).orElse(null));
     }
+
+    public UserResponse findByUserid(String userId){
+        return mapToUserResponse(userRepository.findById(userId).orElse(null));
+    }
+
 
     public boolean delete(String userId) {
         if(userRepository.findById(userId).isPresent()){
@@ -39,5 +46,11 @@ public class UserService {
             return true;
         }
         return false;
+    }
+
+    private UserResponse mapToUserResponse(User user) {
+        return UserResponse.builder()
+                .name(user.getName())
+                .build();
     }
 }

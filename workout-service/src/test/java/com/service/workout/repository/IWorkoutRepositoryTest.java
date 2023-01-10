@@ -13,6 +13,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -37,6 +39,7 @@ public class IWorkoutRepositoryTest {
 
     @Test
     void shouldSaveWorkout(){
+        //Arrange
         Workout expectedWorkout = Workout.builder()
                 .id("id1")
                 .name("GetAllWorkoutsTestRequest1")
@@ -44,10 +47,40 @@ public class IWorkoutRepositoryTest {
                 .date(new Date())
                 .build();
 
+        //Act
         Workout actualWorkout = workoutRepository.save(expectedWorkout);
 
+        //Assert
         assertThat(actualWorkout).usingRecursiveComparison().ignoringFields("id")
                 .isEqualTo(expectedWorkout);
+    }
+
+    @Test
+    void shouldDeleteAllSavedWorkoutsbyUserId(){
+        //Arrange
+        Workout savedWorkout1 = Workout.builder()
+                .id("userid1")
+                .name("GetAllWorkoutsTestRequest1")
+                .exercises(new ArrayList<>())
+                .date(new Date())
+                .build();
+
+        Workout savedWorkout2 = Workout.builder()
+                .id("userid1")
+                .name("GetAllWorkoutsTestRequest1")
+                .exercises(new ArrayList<>())
+                .date(new Date())
+                .build();
+
+        workoutRepository.save(savedWorkout1);
+        workoutRepository.save(savedWorkout2);
+
+        //Act
+        workoutRepository.deleteAllByUserId("userid1");
+        List<Workout> actualWorkouts = workoutRepository.findAllByUserId("userid1").orElse(null);
+
+        assertThat(actualWorkouts).usingRecursiveComparison().ignoringFields("id")
+                .isEqualTo(new ArrayList<>());
     }
 
 }
