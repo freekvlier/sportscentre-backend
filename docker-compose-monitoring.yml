@@ -1,5 +1,5 @@
 # This docker-compose file builds all services using a multistage dockerfile and puts all microservices in production mode
-# Also every service has a dedicated database container
+# Also every service has a dedicated database container and Prometheus/Grafana is added for monitoring
 version: '3.3'
 services:
   gateway:
@@ -96,6 +96,26 @@ services:
     networks:
       - kafka-network
 
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./monitoring/prometheus/prometheus-docker.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    networks:
+      - gateway-network
+      - grafana-network
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 3000:3000
+    networks:
+      - gateway-network
+      - grafana-network
+
 networks:
   user-network:
     driver: bridge
@@ -104,6 +124,8 @@ networks:
   kafka-network:
     driver: bridge
   gateway-network:
+    driver: bridge
+  grafana-network:
     driver: bridge
 
 volumes:

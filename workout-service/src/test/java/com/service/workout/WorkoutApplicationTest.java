@@ -86,7 +86,36 @@ public class WorkoutApplicationTest {
         Integer workoutsCount = workoutRepository.findAll().size();
 
         //Act/Assert
-        mockMvc.perform(MockMvcRequestBuilders.get("/"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/all"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(workoutsCount)));
+    }
+
+    @Test
+    void getAllWorkoutsByUserId() throws Exception {
+        //Arrange
+        workoutRepository.save(Workout.builder()
+                .name("getAllWorkoutsTest")
+                .userId("user123")
+                .exercises(getExerciseList())
+                .date(new Date())
+                .build());
+        workoutRepository.save(Workout.builder()
+                .name("getAllWorkoutsTest")
+                .userId("user123")
+                .exercises(getExerciseList())
+                .date(new Date())
+                .build());
+        workoutRepository.save(Workout.builder()
+                .name("getAllWorkoutsTest")
+                .userId("1")
+                .exercises(getExerciseList())
+                .date(new Date())
+                .build());
+        Integer workoutsCount = workoutRepository.findAllByUserId("1").get().size();
+
+        //Act/Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/").header("Authorization", generateMockBearer()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(workoutsCount)));
     }
