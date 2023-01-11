@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -29,6 +31,14 @@ public class UserController {
     @GetMapping("/login")
     public UserResponse login(@RequestHeader(name="Authorization") String bearer) throws UnsupportedEncodingException {
         return userService.login(bearer);
+    }
+
+    @GetMapping("/login")
+    public List<UserResponse> getAll(@RequestHeader(name="Authorization") String bearer) throws UnsupportedEncodingException, IllegalAccessException {
+        if(isAdmin(bearer))
+            return userService.getAll(bearer);
+        else
+            return new ArrayList<>();
     }
 
     @PostMapping(value = "/setname/{name}")

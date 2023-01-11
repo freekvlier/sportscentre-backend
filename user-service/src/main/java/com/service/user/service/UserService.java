@@ -12,6 +12,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -59,5 +61,10 @@ public class UserService {
         User newUser = userRepository.findById(user.getId()).orElse(null);
         newUser.setName(name);
         return mapToUserResponse(userRepository.save(newUser));
+    }
+
+    public List<UserResponse> getAll(String bearer) {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(this::mapToUserResponse).toList();
     }
 }
