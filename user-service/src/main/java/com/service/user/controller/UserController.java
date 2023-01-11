@@ -1,6 +1,8 @@
 package com.service.user.controller;
 
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.service.user.dto.UserResponse;
 import com.service.user.service.UserService;
 import lombok.AllArgsConstructor;
@@ -30,7 +32,20 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    public boolean deleteUser(@PathVariable String userId) {
-        return userService.delete(userId);
+    public boolean deleteUser(@RequestHeader(name="Authorization") String bearer, @PathVariable String userId) throws IllegalAccessException {
+        if(isAdmin(bearer))
+            return userService.delete(userId);
+        else
+            return false;
+    }
+
+    private boolean isAdmin(String bearer) throws IllegalAccessException {
+        DecodedJWT decodedJWT = JWT.decode(bearer.substring(7));
+        String roles = decodedJWT.getClaim("roles").asString();
+
+        if(roles.contains("Admin"))
+            return true;
+
+        return false;
     }
 }
