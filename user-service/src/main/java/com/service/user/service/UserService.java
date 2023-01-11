@@ -53,4 +53,11 @@ public class UserService {
                 .name(user.getName())
                 .build();
     }
+
+    public UserResponse setName(String bearer, String name) {
+        UserRequest user = new UserRequest(bearer);
+        User newUser = userRepository.findById(user.getId()).orElse(null);
+        newUser.setName(name);
+        return mapToUserResponse(userRepository.save(newUser));
+    }
 }

@@ -27,8 +27,13 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public UserResponse isFirstLogin(@RequestHeader(name="Authorization") String bearer) throws UnsupportedEncodingException {
+    public UserResponse login(@RequestHeader(name="Authorization") String bearer) throws UnsupportedEncodingException {
         return userService.login(bearer);
+    }
+
+    @PostMapping(value = "/setname/{name}")
+    public UserResponse setModalVisible(@RequestHeader(name="Authorization") String bearer, @PathVariable String name) throws IllegalAccessException {
+        return userService.setName(bearer, name);
     }
 
     @DeleteMapping("/{userId}")
