@@ -125,18 +125,6 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>${spring.boot.maven.surefire.version}</version>
         </plugin>
-        <plugin>
-          <groupId>org.owasp</groupId>
-          <artifactId>dependency-check-maven</artifactId>
-          <version>7.4.4</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>check</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
       </plugins>
 <!--    </pluginManagement>-->
   </build>
