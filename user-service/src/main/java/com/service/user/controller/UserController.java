@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/setname/{name}")
-    public UserResponse setModalVisible(@RequestHeader(name="Authorization") String bearer, @PathVariable String name) throws IllegalAccessException {
+    public UserResponse setName(@RequestHeader(name="Authorization") String bearer, @PathVariable String name) throws IllegalAccessException {
         return userService.setName(bearer, name);
     }
 
