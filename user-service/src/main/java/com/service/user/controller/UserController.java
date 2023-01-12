@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @AllArgsConstructor
+//@CrossOrigin(origins = "*")
 //@RequestMapping("user")
 public class UserController {
 
@@ -33,7 +34,7 @@ public class UserController {
         return userService.login(bearer);
     }
 
-    @GetMapping("/login")
+    @GetMapping("/getAll")
     public List<UserResponse> getAll(@RequestHeader(name="Authorization") String bearer) throws UnsupportedEncodingException, IllegalAccessException {
         if(isAdmin(bearer))
             return userService.getAll(bearer);
