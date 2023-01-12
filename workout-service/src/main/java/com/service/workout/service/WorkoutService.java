@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -21,7 +22,7 @@ public class WorkoutService {
         Workout workout = Workout.builder()
                 .name(request.getName())
                 .exercises(request.getExercises())
-                .date(request.getDate())
+                .date(new Date())
                 .userId(userId)
                 .build();
 
