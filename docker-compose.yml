@@ -11,6 +11,11 @@ services:
       - 8080:8080
     environment:
       - SPRING_PROFILES_ACTIVE=production
+      - AZURE_SET_URI=${AZURE_SET_URI}
+      - AZURE_ISSUER_URI=${AZURE_ISSUER_URI}
+      - AZURE_AUDIENCE=${AZURE_AUDIENCE}
+    env_file:
+        - .env
     networks:
       - gateway-network
 
@@ -23,6 +28,12 @@ services:
       - 8081:8081
     environment:
       - SPRING_PROFILES_ACTIVE=production
+      - ENCRYPT_KEY=${ENCRYPT_KEY}
+      - ATLAS_CONNECTION_STRING=${ATLAS_CONNECTION_STRING}
+      - USER_DATABASE_NAME=${USER_DATABASE_NAME}
+      - AZURE_CONNECTION_STRING=${AZURE_CONNECTION_STRING}
+    env_file:
+      - .env
     networks:
       - user-network
       - kafka-network
@@ -30,6 +41,7 @@ services:
     depends_on:
       - mongo-user
       - kafka-service
+
 
   mongo-user:
     container_name: mongo-user
@@ -54,6 +66,12 @@ services:
       - 8082:8082
     environment:
       - SPRING_PROFILES_ACTIVE=production
+      - ENCRYPT_KEY=${ENCRYPT_KEY}
+      - ATLAS_CONNECTION_STRING=${ATLAS_CONNECTION_STRING}
+      - WORKOUT_DATABASE_NAME=${WORKOUT_DATABASE_NAME}
+      - AZURE_CONNECTION_STRING=${AZURE_CONNECTION_STRING}
+    env_file:
+      - .env
     networks:
       - workout-network
       - kafka-network
