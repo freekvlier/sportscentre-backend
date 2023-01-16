@@ -42,7 +42,6 @@ public class WorkoutServiceTest {
         WorkoutRequest workout = WorkoutRequest.builder()
                 .name("ShouldSaveWorkoutTest")
                 .exercises(getRandomExercisesList())
-                .date(today)
                 .build();
 
         //Act
@@ -51,7 +50,6 @@ public class WorkoutServiceTest {
         //Assert
         Mockito.verify(workoutRepository, Mockito.times(1)).save(workoutArgumentCaptor.capture());
         Assertions.assertThat(workoutArgumentCaptor.getValue().getName()).isEqualTo("ShouldSaveWorkoutTest");
-        Assertions.assertThat(workoutArgumentCaptor.getValue().getDate()).isEqualTo(today);
     }
 
     @Test
@@ -111,7 +109,6 @@ public class WorkoutServiceTest {
         return WorkoutRequest.builder()
                 .name(RandomStringUtils.randomAlphabetic(10))
                 .exercises(getRandomExercisesList())
-                .date(new Date())
                 .build();
     }
 

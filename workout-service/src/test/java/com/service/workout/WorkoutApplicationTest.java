@@ -54,8 +54,12 @@ public class WorkoutApplicationTest {
         dymDynamicPropertyRegistry.add("spring.kafka.consumer.bootstrap-servers", kafkaContainer::getBootstrapServers);
     }
 
+    static {
+        System.setProperty("spring.data.mongodb.database", "workout");
+    }
+
     private String generateMockBearer() {
-        return "Bearer " + Jwts.builder().claim("oid", "1").compact();
+        return "Bearer " + Jwts.builder().claim("oid", "1").claim("roles", "Admin").compact();
     }
 
     @Test
@@ -86,7 +90,7 @@ public class WorkoutApplicationTest {
         Integer workoutsCount = workoutRepository.findAll().size();
 
         //Act/Assert
-        mockMvc.perform(MockMvcRequestBuilders.get("/all"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/all").header("Authorization", generateMockBearer()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(workoutsCount)));
     }
@@ -124,7 +128,6 @@ public class WorkoutApplicationTest {
         return WorkoutRequest.builder()
                 .name(RandomStringUtils.randomAlphabetic(10))
                 .exercises(getExerciseList())
-                .date(new Date())
                 .build();
     }
 

@@ -40,7 +40,7 @@ public class WorkoutControllerTest {
 
     private ObjectMapper objectMapper = new ObjectMapper();
     private String generateMockBearer() {
-        return "Bearer " + Jwts.builder().claim("oid", "1").compact();
+        return "Bearer " + Jwts.builder().claim("oid", "1").claim("roles", "Admin").compact();
     }
 
 
@@ -64,7 +64,7 @@ public class WorkoutControllerTest {
         Mockito.when(workoutService.getAll()).thenReturn(asList(workoutRequest1, workoutRequest2));
 
         // Act/Assert
-        mockMvc.perform(get("/all"))
+        mockMvc.perform(get("/all").header("Authorization", generateMockBearer()))
                 .andExpect(status().is(200))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(jsonPath("$.size()", Matchers.is(2)))
@@ -115,7 +115,6 @@ public class WorkoutControllerTest {
         WorkoutRequest workoutRequest = WorkoutRequest.builder()
                 .name("testCreateWorkout1")
                 .exercises(new ArrayList<>())
-                .date(new Date())
                 .build();
 
         String workoutRequestJson = objectMapper.writeValueAsString(workoutRequest);
@@ -133,7 +132,6 @@ public class WorkoutControllerTest {
         WorkoutRequest workoutRequest = WorkoutRequest.builder()
                 .name("testCreateWorkout1")
                 .exercises(new ArrayList<>())
-                .date(new Date())
                 .build();
 
         String workoutRequestJson = objectMapper.writeValueAsString(workoutRequest);

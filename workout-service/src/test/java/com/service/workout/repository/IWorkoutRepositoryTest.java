@@ -37,6 +37,10 @@ public class IWorkoutRepositoryTest {
         registry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
     }
 
+    static {
+        System.setProperty("spring.data.mongodb.database", "workout");
+    }
+
     @Test
     void shouldSaveWorkout(){
         //Arrange
