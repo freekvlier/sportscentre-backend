@@ -134,7 +134,7 @@ public class WorkoutApplicationTest {
         for (int i = 0; i < 10; i++) {
             ExerciseRequest exerciseRequest = getExerciseRequest();
             Exercise exercise = Exercise.builder()
-                    .exerciseType(exerciseRequest.getExerciseType())
+                    .name(exerciseRequest.getName())
                     .weight(exerciseRequest.getWeight())
                     .sets(exerciseRequest.getSets())
                     .reps(exerciseRequest.getReps())
@@ -150,7 +150,7 @@ public class WorkoutApplicationTest {
         Random r = new Random();
 
         return ExerciseRequest.builder()
-                .exerciseType(RandomStringUtils.randomAlphabetic(10))
+                .name(RandomStringUtils.randomAlphabetic(10))
                 .weight(r.nextInt(100))
                 .sets(r.nextInt(20))
                 .reps(r.nextInt(10))

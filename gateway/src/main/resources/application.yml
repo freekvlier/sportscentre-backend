@@ -51,6 +51,11 @@ spring:
             - Path=/workout/**
           filters:
             - RewritePath=/workout/(?<segment>.*), /$\{segment}
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
 ---
 spring:
   config:
@@ -71,6 +76,11 @@ spring:
             - Path=/workout/**
           filters:
             - RewritePath=/workout/(?<segment>.*), /$\{segment}
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
 
 ---
 spring:
@@ -92,3 +102,8 @@ spring:
             - Path=/workout/**
           filters:
             - RewritePath=/workout/(?<segment>.*), /$\{segment}
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"

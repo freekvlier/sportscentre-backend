@@ -15,10 +15,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable() // (1)
-                .authorizeRequests().anyRequest().authenticated() // (2)
-                .and()
-                .oauth2ResourceServer().jwt(); // (3)
+        http
+                .authorizeRequests().anyRequest().authenticated()
+                .and().csrf().disable()
+                .oauth2ResourceServer().jwt();
     }
 
     @Bean
