@@ -1,3 +1,7 @@
+# Set .env vars with:
+# kubectl delete secret env-vars
+# kubectl create secret generic env-vars --from-env-file=.env
+
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -48,6 +52,21 @@ spec:
           env:
             - name: spring_profiles_active
               value: kubernetes
+            - name: AZURE_SET_URI
+              valueFrom:
+                secretKeyRef:
+                  name: env-vars
+                  key: AZURE_SET_URI
+            - name: AZURE_ISSUER_URI
+              valueFrom:
+                secretKeyRef:
+                  name: env-vars
+                  key: AZURE_ISSUER_URI
+            - name: AZURE_AUDIENCE
+              valueFrom:
+                secretKeyRef:
+                  name: env-vars
+                  key: AZURE_AUDIENCE
 ---
 apiVersion: v1
 kind: Service
@@ -92,6 +111,26 @@ spec:
           env:
             - name: spring_profiles_active
               value: atlas
+            - name: ENCRYPT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: env-vars
+                  key: ENCRYPT_KEY
+            - name: ATLAS_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: env-vars
+                  key: ATLAS_CONNECTION_STRING
+            - name: WORKOUT_DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: env-vars
+                  key: WORKOUT_DATABASE_NAME
+            - name: AZURE_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: env-vars
+                  key: AZURE_CONNECTION_STRING
 ---
 apiVersion: v1
 kind: Service
@@ -136,6 +175,26 @@ spec:
           env:
             - name: spring_profiles_active
               value: atlas
+            - name: ENCRYPT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: env-vars
+                  key: ENCRYPT_KEY
+            - name: ATLAS_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: env-vars
+                  key: ATLAS_CONNECTION_STRING
+            - name: USER_DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: env-vars
+                  key: USER_DATABASE_NAME
+            - name: AZURE_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: env-vars
+                  key: AZURE_CONNECTION_STRING
 ---
 apiVersion: v1
 kind: Service
