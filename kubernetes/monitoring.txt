@@ -17,3 +17,6 @@ Expose port:
 
 -- Remove --
 kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup
+
+-- GKE --
+kubectl patch svc grafana -n monitoring -p '{"spec": {"type": "LoadBalancer"}}'

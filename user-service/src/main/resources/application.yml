@@ -10,7 +10,7 @@ server:
 mongodb.encrypt:
   keys:
     - version: 1
-      key: hqHKBLV83LpCqzKpf8OvutbCs+O5wX5BPu3btWpEvXA=
+      key: ${ENCRYPT_KEY}
 
 management:
   endpoints:
@@ -26,8 +26,8 @@ spring:
     bootstrap-servers: kafka-service:9092
   data:
     mongodb:
-      uri: mongodb+srv://Dizziness1959:5hLJx9%25%23AiW%5E%24m@sportscentre.hn5hb73.mongodb.net/?retryWrites=true&w=majority
-      database: user
+      uri: ${ATLAS_CONNECTION_STRING}
+      database: ${USER_DATABASE_NAME}
 
 ---
 spring:
@@ -39,7 +39,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://user:user@localhost:27017
-      database: user
+      database: ${USER_DATABASE_NAME}
 
 ---
 spring:
@@ -51,7 +51,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://user:user@mongo-user:27017
-      database: user
+      database: ${USER_DATABASE_NAME}
 
 ---
 spring:
@@ -62,5 +62,5 @@ spring:
     bootstrap-servers: kafka-service:9092
   data:
     mongodb:
-      uri: mongodb://freekvanlier:KNlu83DMFNyutDCyq9p6olIHQo6uVtjh2uOq2iudQM7cfPOGhX42p1o4Z2aF6Y1Xohoqj7KxT6J7ACDby2nU1w==@freekvanlier.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@freekvanlier@
-      database: user
+      uri: ${AZURE_CONNECTION_STRING}
+      database: ${USER_DATABASE_NAME}

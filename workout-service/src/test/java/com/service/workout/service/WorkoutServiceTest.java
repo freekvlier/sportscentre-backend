@@ -19,8 +19,6 @@ import org.testcontainers.shaded.org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(MockitoExtension.class)
 public class WorkoutServiceTest {
 
@@ -132,7 +130,7 @@ public class WorkoutServiceTest {
         for (int i = 0; i < 10; i++) {
             ExerciseRequest exerciseRequest = getExerciseRequest();
             Exercise exercise = Exercise.builder()
-                    .exerciseType(exerciseRequest.getExerciseType())
+                    .name(exerciseRequest.getName())
                     .weight(exerciseRequest.getWeight())
                     .sets(exerciseRequest.getSets())
                     .reps(exerciseRequest.getReps())
@@ -148,7 +146,7 @@ public class WorkoutServiceTest {
         Random r = new Random();
 
         return ExerciseRequest.builder()
-                .exerciseType(RandomStringUtils.randomAlphabetic(10))
+                .name(RandomStringUtils.randomAlphabetic(10))
                 .weight(r.nextInt(100))
                 .sets(r.nextInt(20))
                 .reps(r.nextInt(10))
