@@ -35,10 +35,9 @@ jobs:
           location: ${{ env.GKE_ZONE }}
           credentials: ${{ secrets.GKE_SA_KEY }}
 
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1.3
-        with:
-          COMPOSE_PROJECT_NAME: "sportscentre"
+      - name: Replace Environment Variables
+        uses: danielr1996/envsubst-action@1.0.0
+        env:
           AZURE_SET_URI: ${{ secrets.AZURE_SET_URI }}
           AZURE_ISSUER_URI: ${{ secrets.AZURE_ISSUER_URI }}
           AZURE_AUDIENCE: ${{ secrets.AZURE_AUDIENCE }}
@@ -47,6 +46,9 @@ jobs:
           AZURE_CONNECTION_STRING: ${{ secrets.AZURE_CONNECTION_STRING }}
           USER_DATABASE_NAME: ${{ secrets.USER_DATABASE_NAME }}
           WORKOUT_DATABASE_NAME: ${{ secrets.WORKOUT_DATABASE_NAME }}
+        with:
+          input: kubernetes/deployment.yaml
+          output: kubernetes/deploy.yaml
 
       - name: Wait for other pipelines to succeed
         uses: lewagon/wait-on-check-action@v1.2.0
@@ -56,11 +58,8 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
 
-      # Deploy the Docker image to the GKE cluster
+      # Deploy to the GKE cluster - kubectl rollout restart deploy -n sportscentre
       - name: Deploy
         run: |-
-          kubectl apply -f kubernetes/setup.yaml
-          kubectl create secret generic env-vars --from-env-file=.env --namespace=sportscentre
-          kubectl apply -f kubernetes/deployment.yaml
-          kubectl rollout restart deploy -n sportscentre
-          kubectl get services -o wide
+          kubectl apply -f kubernetes/deploy.yaml
+          kubectl get deployments -o wide --namespace=sportscentre
