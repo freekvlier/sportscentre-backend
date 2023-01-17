@@ -2,8 +2,8 @@ name: Deploy to GKE
 
 on:
   push:
-    branches:
-      - main
+#    branches:
+#      - main
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -56,9 +56,10 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
 
-      # Deploy the Docker image to the GKE cluster
+      # Deploy to the GKE cluster
       - name: Deploy
         run: |-
+          cat .env
           kubectl apply -f kubernetes/setup.yaml
           kubectl create secret generic env-vars --from-env-file=.env --namespace=sportscentre
           kubectl apply -f kubernetes/deployment.yaml
