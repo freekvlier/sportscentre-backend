@@ -2,9 +2,11 @@ name: docker-compose
 
 on:
   push:
-    branches: [ dev ]
+    branches:
+      - main
+      - development
   pull_request:
-    branches: [ dev ]
+    types: [opened, synchronize, reopened]
 
 env:
   REGISTRY: ghcr.io
@@ -21,23 +23,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/checkout@v3
-      - name: Set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-
-      - name: Cache Maven packages
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          # If the hash of the project files is the same, use cache.
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os}}-m2-
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
-
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1.3
         with:
@@ -52,6 +37,6 @@ jobs:
           WORKOUT_DATABASE_NAME: ${{ secrets.WORKOUT_DATABASE_NAME }}
 
       - name: Build and run docker compose stack
-        run: docker compose up -d
+        run: docker compose up -d --build
       - name: Check running containers
         run: docker ps -a
