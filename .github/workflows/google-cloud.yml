@@ -2,8 +2,8 @@ name: Deploy to GKE
 
 on:
   push:
-#    branches:
-#      - main
+    branches:
+      - main
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -62,5 +62,5 @@ jobs:
       - name: Deploy
         run: |-
           kubectl apply -f kubernetes/deploy.yaml
-          kubectl rollout restart deploy -n sportscentre
-          kubectl get services -o wide
+#          kubectl rollout restart deploy -n sportscentre
+          kubectl get deployments -o wide --namespace=sportscentre
