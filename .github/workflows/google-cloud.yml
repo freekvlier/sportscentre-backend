@@ -59,7 +59,6 @@ jobs:
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
         run: |-
-          kubectl delete secret env-vars
           kubectl create secret generic env-vars --from-env-file=.env
           kubectl apply -f kubernetes/
           kubectl rollout restart deploy -n sportscentre

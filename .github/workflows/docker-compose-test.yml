@@ -2,9 +2,11 @@ name: docker-compose
 
 on:
   push:
-    branches: [ dev ]
+    branches:
+      - main
+      - development
   pull_request:
-    branches: [ dev ]
+    types: [opened, synchronize, reopened]
 
 env:
   REGISTRY: ghcr.io
