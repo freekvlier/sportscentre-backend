@@ -47,8 +47,8 @@ jobs:
           USER_DATABASE_NAME: ${{ secrets.USER_DATABASE_NAME }}
           WORKOUT_DATABASE_NAME: ${{ secrets.WORKOUT_DATABASE_NAME }}
         with:
-          input: kubernetes/deployment.yml
-          output: kubernetes/deploy.yml
+          input: kubernetes/deployment.yaml
+          output: kubernetes/deploy.yaml
 
       - name: Wait for other pipelines to succeed
         uses: lewagon/wait-on-check-action@v1.2.0
