@@ -60,7 +60,6 @@ spring:
     mongodb:
       uri: mongodb://workout:workout@localhost:27017
       database: ${WORKOUT_DATABASE_NAME}
-
 ---
 spring:
   config:
