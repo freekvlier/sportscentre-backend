@@ -58,9 +58,8 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
 
-      # Deploy to the GKE cluster
+      # Deploy to the GKE cluster - kubectl rollout restart deploy -n sportscentre
       - name: Deploy
         run: |-
           kubectl apply -f kubernetes/deploy.yaml
-#          kubectl rollout restart deploy -n sportscentre
           kubectl get deployments -o wide --namespace=sportscentre
