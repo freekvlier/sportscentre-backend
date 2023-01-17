@@ -61,6 +61,6 @@ jobs:
       # Deploy to the GKE cluster
       - name: Deploy
         run: |-
-          kubectl apply -f kubernetes/deploy.yml
+          kubectl apply -f kubernetes/deploy.yaml
           kubectl rollout restart deploy -n sportscentre
           kubectl get services -o wide
