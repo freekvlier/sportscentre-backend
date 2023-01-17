@@ -1,14 +1,3 @@
-# Set .env vars with:
-# kubectl delete secret env-vars
-# kubectl create secret generic env-vars --from-env-file=.env
-
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: sportscentre
-  labels:
-    name: sportscentre
----
 apiVersion: v1
 kind: Service
 metadata:

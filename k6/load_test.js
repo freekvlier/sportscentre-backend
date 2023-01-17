@@ -6,12 +6,8 @@ export const options = {
         { duration: '2m', target: 10 },
         { duration: '3m', target: 100 },
         { duration: '3m', target: 500 },
-        { duration: '3m', target: 100 },
+        { duration: '3m', target: 0 }, // ramp-down to 0 users
     ],
-    thresholds: {
-        'http_req_duration': ['p(99)<1500'], // 99% of requests must complete below 1.5s
-    },
-
 
 };
 

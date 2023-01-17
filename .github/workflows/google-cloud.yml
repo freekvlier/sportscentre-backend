@@ -59,7 +59,8 @@ jobs:
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
         run: |-
+          kubectl apply -f kubernetes/setup.yaml
           kubectl create secret generic env-vars --from-env-file=.env --namespace=sportscentre
-          kubectl apply -f kubernetes/
+          kubectl apply -f kubernetes/deployment.yaml
           kubectl rollout restart deploy -n sportscentre
           kubectl get services -o wide
