@@ -93,6 +93,7 @@ kubectl apply -f sportscentre/kubernetes/deployment.yaml
 ```
 
 # Leeruitkomsten
+Gedurende het semester zijn de volgende leeruitkomsten aangetoond:
 ### Learning outcome 1 - Developing and Deployment of Enterprise Software as a Professional
 
 You develop and deploy enterprise software, both individually and as a team. You select a suitable enterprise development platform and application framework(s). You select and apply a software development process, which complies with professional industry standards. You actively share knowledge within your team and with stakeholders to improve knowledge & processes.
