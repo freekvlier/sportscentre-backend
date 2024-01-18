@@ -61,7 +61,7 @@ Volg onderstaande stappen om de backend van SportsCentre op te zetten:
 ### 1. Clone de repository en navigeer naar de backend-directory:
 
 ```bash
-git clone https://github.com/jouw-gebruikersnaam/sportscentre-backend.git
+git clone https://github.com/freekvlier/sportscentre-backend.git
 cd sportscentre-backend
 ```
 
