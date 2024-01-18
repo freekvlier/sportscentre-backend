@@ -91,3 +91,36 @@ docker-compose -f docker-compose-development.yml up
 ```bash
 kubectl apply -f sportscentre/kubernetes/deployment.yaml
 ```
+
+# Leeruitkomsten
+### Learning outcome 1 - Developing and Deployment of Enterprise Software as a Professional
+
+You develop and deploy enterprise software, both individually and as a team. You select a suitable enterprise development platform and application framework(s). You select and apply a software development process, which complies with professional industry standards. You actively share knowledge within your team and with stakeholders to improve knowledge & processes.
+
+### Learning Outcome 2 - Context Based Research
+
+You deliver professional products according to planning, which is the result of a structured and methodical investigation. You have a critical view towards your own and other people’s work, by comparing them to alternatives, judging the structured and methodical approach and considering general accepted and ethical values. Your products are validated with stakeholders and other available research, and you can judge & communicate the relevance and value of the project in its own context.
+
+### Learning Outcome 3 - Preparation for Life-Long Learning
+
+You acquire skills required for your future career. You are aware of multiple career paths and can reflect which ones fit best, considering your (potential) skills and ambitions. You are aware of developments in software engineering and can signal trends.
+
+### Learning Outcome 4 - Scalable Architectures
+
+Besides functionality, you develop the architecture of enterprise software based on quality attributes. You especially consider attributes most relevant to enterprise contexts with high volume data and events. You design your architecture with future adaptation in mind. Your development environment supports this by being able to independently deploy and monitor the running parts of your application.
+
+### Learning Outcome 5 - Development and Operations (DevOps)
+
+You set up environments and tools which support your chosen software development process. You provide governance for all stakeholders’ goals. You aim for as much automation as possible, to enable short release times and high software quality.
+
+### Learning Outcome 6 - Cloud Services
+
+You can explain what a cloud platform provider is and can deploy (parts of) your application to a cloud platform. You integrate cloud services (for example: Serverless computing, cloud storage, container management) into your enterprise application, and can explain the added value of these cloud services for your application.
+
+### Learning Outcome 7 - Security by Design
+
+You investigate how to minimize security risks for your application, and you incorporate best practices in your whole software development process. 
+
+### Learning Outcome 8 – Distributed Data
+
+You are aware of specific data requirements for enterprise systems. You apply best practices for distributed data during your whole development process, both for non-functional and functional requirements. You especially take legal and ethical issues into consideration.
