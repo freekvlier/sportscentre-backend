@@ -1,6 +1,6 @@
 # SportsCentre Backend
 
-SportsCentre is een sporttracking- en deelplatform ontwikkeld als project in semester 6 (2022-2023) van de studie Software Engineering op Fontys Hogescholen Eindhoven. Het project bestaat uit een front- en backend. De backend is opgebouwd volgens een microservices-architectuur met Java Spring Boot als backendframework en MongoDB als de gekozen database. Hieronder vind je de context en technische details van het backend project.
+SportsCentre is een sporttracking- en deelplatform ontwikkeld als project in semester 6 (2022-2023) van de studie Software Engineering op Fontys Hogescholen Eindhoven. Het project bestaat uit een front- en backend. De backend is opgebouwd volgens een microservices-architectuur met Java Spring Boot als backendframework en MongoDB als de gekozen database. De frontend repository is [hier]([https://github.com/freekvlier/Musicplanet-frontend](https://github.com/freekvlier/sportscentre-frontend.git) te vinden.Hieronder vind je de context en technische details van het backend project. 
 
 ## Projectomschrijving
 Het idee achter SportsCentre ontstond uit de observatie dat veel mensen hun workouts in de notitie-app van hun telefoon bijhouden, wat leidt tot lange lijsten aan het einde van de dag. SportsCentre biedt een oplossing door een platform te creëren waarmee gebruikers eenvoudig hun sportieve prestaties kunnen bijhouden en delen. Het omvat functionaliteiten zoals het starten van een workout, het invoeren van oefeningen en reps, en het delen van workouts met vrienden via een tijdlijn.
